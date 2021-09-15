@@ -1,16 +1,10 @@
-import sys
-sys.path.append('D:\Github\Data-science\Python')
-from Pearsons_correlation import drop_feature
 import numpy as np
-from sklearn.preprocessing import LabelEncoder
-import pandas as pd
-le = LabelEncoder()
-from sklearn.datasets import load_iris
-
-df = pd.DataFrame({'A': ['a', 'b', 'a'], 'B': ['b', 'a', 'c'],'C': [1, 2, 3]})
-print(df)
-columns = df.columns
-features = columns.tolist()
-features1=['A', 'B', 'C']
-print(features[0])
-print(features1)
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import Normalizer
+ct = ColumnTransformer(
+     [("norm1", Normalizer(norm='l1'), [1]),
+     ("norm2", Normalizer(norm='l1'), slice(4))])
+X = np.array([[0., 1., 2., 2.],
+              [1., 1., 0., 1.]])
+print(X)
+print(ct.fit_transform(X))
